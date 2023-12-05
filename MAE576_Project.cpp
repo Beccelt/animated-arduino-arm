@@ -14,8 +14,23 @@ Servo servo2;
 Servo servo3;
 Servo servo4;
 
+// Initialize the pins for the servos
+
+const int servoPin1 = 7;
+const int servoPin2 = 6;
+const int servoPin3 = 5;
+
+// Initialize the home position for the servos
+const int homePos = 0;
+
 // Madgwick filter requires an update rate, this value is in Hz
 const int filterUpdateRate = 75;
+
+// Need to convert the equivalent servo rotation from sensor data
+const long sensorRotMin = -90;
+const long sensorRotMax = 90;
+const long servoRotMin = 0;
+const long servoRotMax = 180;
 
 void setup(void) {
   Serial.begin(115200);
@@ -40,15 +55,13 @@ void setup(void) {
 
   filter.begin(filterUpdateRate);
 
-  servo1.attach(7);
-  servo2.attach(6); 
-  servo3.attach(5); 
-  servo4.attach(4); 
+  servo1.attach(servoPin1);
+  servo2.attach(servoPin2); 
+  servo3.attach(servoPin3); 
 
-  servo1.write(0);
-  servo2.write(0);
-  servo3.write(0);
-  servo4.write(0);
+  servo1.write(homePos);
+  servo2.write(homePos);
+  servo3.write(homePos);
 }
 
 void loop() {
@@ -64,9 +77,9 @@ void loop() {
   float yaw = filter.getYaw();
 
   // Map roll, pitch, yaw to servo angles
-  int servo1Angle = map(yaw, -90, 90, 0, 180);   // For yaw
-  int servo2Angle = map(roll, -90, 90, 0, 180);  // For roll
-  int servo3Angle = map(pitch, -90, 90, 0, 180); // For pitch
+  int servo1Angle = map(yaw, sensorRotMin, sensorRotMax, servoRotMin, servoRotMax);   // For yaw
+  int servo2Angle = map(roll, sensorRotMin, sensorRotMax, servoRotMin, servoRotMax);  // For roll
+  int servo3Angle = map(pitch, sensorRotMin, sensorRotMax, servoRotMin, servoRotMax); // For pitch
 
   // Write to servos
   servo1.write(servo1Angle);
