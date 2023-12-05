@@ -20,15 +20,10 @@ https://github.com/Beccelt/animated-arduino-arm/blob/main/MAE576_Project.cpp
 Install to PlatformIO (on Visual Studio Code) the following:
 
 ```bash
-	electroniccats/MPU6050@^1.0.0
-	tockn/MPU6050_tockn@^1.5.2
-	featherfly/SoftwareSerial@^1.0
-	adafruit/Adafruit BusIO@^1.14.5
-	plerup/EspSoftwareSerial@^8.1.0
 	arduino-libraries/Servo@^1.2.1
-	adafruit/Adafruit PWM Servo Driver Library@^3.0.1
 	arduino-libraries/Madgwick@^1.2.0
 	adafruit/Adafruit Unified Sensor@^1.1.14
+	adafruit/Adafruit MPU6050@^2.2.6
 ```
 
 Please make sure these are added with the latest version of every file.
